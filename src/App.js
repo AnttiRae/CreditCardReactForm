@@ -1,4 +1,5 @@
 import React from 'react';
+import { renderIntoDocument } from 'react-dom/test-utils';
 import './App.css';
 
 class CreditCard extends React.Component {
@@ -7,7 +8,7 @@ class CreditCard extends React.Component {
     this.state = {creditCardNumber: 0}
     this.state = {ccv: 0}
     this.state = {cardHolder : ""}
-    this.state = {dateOfExpiry: {month:1, year: 2020}
+    this.state = {dateOfExpiry: {month:null, year: null}
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,6 +49,19 @@ class CreditCard extends React.Component {
     console.log('moi')
   }
 
+  FormInput(className, placeholder, pattern, inputMode, name, type) {
+    return(
+      <input
+            className={className}
+            placeholder={placeholder}
+            pattern={pattern}
+            inputMode={inputMode}
+            name={name} 
+            type={type}
+            onChange={this.handleChange} />
+    )
+  }
+
   render() {
     return (
       <div className="App">
@@ -55,46 +69,13 @@ class CreditCard extends React.Component {
         <div className="box">
           <h2>CreditCard</h2>
           <form>
-            <input
-            className="card-number-input"
-            placeholder="Card Number"
-            pattern="^[0-9\s]{13,19}$"
-            inputMode="numeric"
-            name="creditCardNumber" 
-            type="tel"
-            onChange={this.handleChange} />
-            <input
-            className="ccv-input"
-            placeholder="CCV"
-            pattern="^[0-9]{3,4}$"
-            inputMode="numeric"
-            name="ccv" 
-            type="tel"
-            onChange={this.handleChange} />
-            <input 
-            className="card-holder"
-            placeholder="Card Holder"
-            type="text"
-            name="cardHolder"
-            onChange={this.handleChange} />
+            {this.FormInput("card-number-input", "Card Number", "^[0-9\s]{13,19}$", "numeric", "creditCardNumber", "tel")}
+            {this.FormInput("ccv-input", "CCV", "^[0-9]{3,4}$", "numeric", "ccv", "tel")}
+            {this.FormInput("card-holder", "Card Holder", "", "text", "cardHolder", "text" )}
             <label>Expiration</label>
-            <input 
-            className="date-of-expiry-month"
-            name="dateOfExpiryMonth"
-            placeholder="MM"
-            type="tel"
-            inputMode="numeric"
-            pattern="^[0-9]{1,2}$"
-            onChange={this.handleChange}
-            />
+            {this.FormInput("date-of-expiry-month", "MM", "^[0-9]{1,2}$", "numeric", "dateOfExpiryMonth", "tel" )}
             /
-            <input 
-            className="date-of-expiry-year"
-            placeholder="YY"
-            name="dateOfExpiryYear"
-            pattern="^[0-9]{2}$"
-            onChange={this.handleChange}
-            />
+            {this.FormInput("date-of-expiry-year", "YY", "^[0-9]{1,2}$", "numeric", "dateOfExpiryYear", "tel" )}
           <button onClick={this.handleSubmit}>+</button>
           </form>
         </div>
