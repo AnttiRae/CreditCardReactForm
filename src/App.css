@@ -9,10 +9,24 @@ body {
   min-height: 100vh;
 }
 
+.credit-card-form {
+  /* border: 1px solid yellow; */
+  display: flex;
+  width: 400px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-submit-button {
+  margin-top: 1rem;
+}
+
 .box {
-  border: 1px solid maroon;
+  background: rgb(0, 132, 255);
+  border: 1px solid white;
   text-align: center;
   margin: auto;
+  padding: 20px;
 }
 
 .ccv-input {
