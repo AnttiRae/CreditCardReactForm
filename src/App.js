@@ -1,5 +1,4 @@
 import React from 'react';
-import { renderIntoDocument } from 'react-dom/test-utils';
 import './App.css';
 
 class CreditCard extends React.Component {
@@ -19,7 +18,6 @@ class CreditCard extends React.Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
-    console.log(event)
     if (name === 'dateOfExpiryMonth' | name === 'dateOfExpiryYear') {
       if (name === 'dateOfExpiryMonth') {
         this.setState({
@@ -47,6 +45,7 @@ class CreditCard extends React.Component {
 
   handleSubmit(event) {
     console.log('moi')
+    event.preventDefault();
   }
 
   formInput(className, placeholder, pattern, inputMode, name, type) {
@@ -68,16 +67,16 @@ class CreditCard extends React.Component {
       <div className="container">
         <div className="box">
           <h2>CreditCard</h2>
-          <form>
+          <form className="credit-card-form">
             {this.formInput("card-number-input", "Card Number", "^[0-9\s]{13,19}$", "numeric", "creditCardNumber", "tel")}
             {this.formInput("ccv-input", "CCV", "^[0-9]{3,4}$", "numeric", "ccv", "tel")}
-            {this.formInput("card-holder", "Card Holder", "", "text", "cardHolder", "text" )}
+            {this.formInput("card-holder-input", "Card Holder", "*", "text", "cardHolder", "text" )}
             <label>Expiration</label>
             {this.formInput("date-of-expiry-month", "MM", "(?=0{1})0{1}[0-9]{1}|(?=1{1})1{1}[0-2]{1}$", "numeric", "dateOfExpiryMonth", "tel" )}
             /
             {this.formInput("date-of-expiry-year", "YY", "^[0-9]{1,2}$", "numeric", "dateOfExpiryYear", "tel" )}
-          <button onClick={this.handleSubmit}>+</button>
           </form>
+          <button className="form-submit-button" onClick={this.handleSubmit}>+</button>
         </div>
       </div>
     </div>
